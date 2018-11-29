@@ -1,0 +1,25 @@
+<div class="container">
+  <h3>Please fill the form</h3>
+  <form #contactForm="ngForm" class="form-group width">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" name="email" placeholder="Your Email" [(ngModel)]="detail.email" #email="ngModel" required email>
+    <div class="danger" *ngIf="email.invalid && (email.touched||email.dirty)">
+      <div *ngIf="email.errors.required">
+        Email is required
+      </div>
+      <div *ngIf="email.errors.email">
+        Not a valid email
+      </div>
+    </div>
+    <label for="topic">Topic</label>
+    <input type="text" class="form-control" name="topic" placeholder="Topic" [(ngModel)]="detail.topic" #topic="ngModel" required>
+    <label for="message">Message</label>
+    <textarea class="form-control" name="message" rows="10" placeholder="Message" [(ngModel)]="detail.message" #message="ngModel" required></textarea>
+    <div class="danger" *ngIf="message.invalid && (message.touched || message.dirty)">
+      Message is required
+    </div>
+    <br>
+    <button type="submit" [disabled]="contactForm.invalid" (click)=sendNow() *ngIf="!sending" class="btn btn-primary" name="submit">Send</button>
+    <button type="button" *ngIf="sending" class="btn btn-info" name="sending">Sending</button>
+  </form>
+</div>
